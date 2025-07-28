@@ -1,5 +1,16 @@
+def getDb():
+    mydb=mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="rakshi@05",
+    database="rakshitha_cse"
+    )
+    return mydb
+
+
 import mysql.connector
 def insert_data(id,name,password,email):
+    mydb=getDb()
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -20,6 +31,7 @@ def insert_data(id,name,password,email):
 
 import mysql.connector
 def update_data(name,id):
+    mydb=getDb()
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -38,6 +50,7 @@ def update_data(name,id):
 def deleteData():
 import mysql.connector
 def delete_data(id):
+    mydb=getDb()
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
