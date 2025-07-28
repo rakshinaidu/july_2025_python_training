@@ -1,0 +1,186 @@
+use rakshitha_cse
+
+create table user(
+id int,
+name varchar(50),
+email varchar(50),
+mobile varchar(50)
+)
+
+insert into user (id,name,email,mobile) 
+values(57,'Rakshi','2004rakshi@gmail.com','9066671777'),
+(75,'Seenu','2003seenu@gmail.com','9066671777')
+
+delete into user where name='Rakshi'
+
+alter table user add password varchar(50)
+
+create table user(
+id int not null primary key,
+name varchar(30)
+)
+
+insert into user (id,name) 
+values(57,'Rakshi'),
+(75,'Seenu')
+
+update user set email='rakshi0719@gmail.com' where id=57;
+update user set email='rakshi1907@gmail.com' where id=75;
+update user set password='0719' where id=57;
+update user set password='1907' where id=57;
+update user set password ='0507' where id=55;
+update user set password ='0705' where id=74;
+
+select * from user where name like 'r%';
+
+create table hobbies(
+ id int not null primary key,
+ user_id int not null,
+ description text
+)
+ select * from hobbies;
+ update user set id=id where id<3
+ 
+update hobbies set conn=75 where id=7 
+update hobbies set conn=57 where id=5
+
+select * from user as u join hobbies as h on u.id=h.conn
+
+select * from user as u left join hobbies as h on u.id=h.conn
+
+pip install mysql-connector-python
+
+import mysql.connector
+mydb = mysql.connector.connect(
+host="localhost",
+user="root",
+password="rakshi@05", 
+database="rakshitha_cse"
+)
+print(mydb)
+cur=mydb.cursor()
+cur.execute("select * from user)
+myresult=cur.fetchall()
+for x in myresult:
+print(x)
+
+
+import mysql.connector
+def insert_data(id,name,password,email):
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="rakshi@05",
+    database="rakshitha_cse"
+
+    )
+    cur=mydb.cursor()
+    sql="INSERT INTO user (id,name,password,email) VALUES (%s,%s,%s,%s)"
+    val=(id,name,password,email)
+    cur.execute(sql,val)
+    mydb.commit()
+    cur.close()
+   
+    mydb.close()
+    print(cur.rowcount,"RECORD INSERTED.")
+
+id=input("Enter id:")
+name=input("Enter the name:")
+email=input("Enter email:")
+password=input("Enter the pasword:")
+insert_data(id,name,password,email)
+                 
+
+Check whether email is exist or not using python and mysql
+
+import mysql.connector
+
+def check():
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="rakshi@05",
+    database="rakshitha_cse"
+)
+    email=input("Enter the email:")
+    cur=mydb.cursor()
+    query = "SELECT COUNT(id) FROM user WHERE email = %s"
+    cur.execute(query,(email,))
+    myresult= cur.fetchall()
+
+
+    if myresult[0][0]>=1:
+        print("Email already exists in the database.")
+    else:
+        print("Email does not exist. You can proceed to insert.")
+
+    cur.close()
+    mydb.close()
+
+check()
+
+insert the email into mysql if email is exist  it should not insert and throw the error else insert the mysql
+
+
+import mysql.connector
+def check():
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="rakshi@05",
+    database="rakshitha_cse"
+)   
+    id=int(input("id :"))
+    name=input("name :")
+    email=input("Enter the email:")
+    password=input("password :")
+    cur=mydb.cursor()
+    query = "SELECT COUNT(id) FROM user WHERE email = %s"
+    cur.execute(query,(email,))
+    myresult= cur.fetchall()
+
+    if myresult:
+        print("Email already exists in the database.")
+    else:
+        query="insert into user(id,name,email,password) values(%s,%s,%s,%s)"
+        val=(id,name,email,password)
+        cur.execute(query,val)
+        print("inserted")
+
+    cur.close()
+    mydb.close()
+
+check()
+
+Create a new folder
+And create two files:
+add.py
+def add(a,b):
+    return a+b
+def sub(a,b):
+    return a-b
+def mul(a,b):
+    return a*b
+
+start.py
+from add import add,sub,mul
+from mymodule import checkNumber
+result=add(5,4)
+print(result)
+result=sub(9,5)
+print(result)
+result=mul(10,3)
+print(result)
+checkNumber(100)
+
+
+Also create a file named mymodule.py
+def checkNumber(num):
+    if(num<100):
+        raise("Number should be 100 or greater")
+    else:
+        print("Number is ok")
+        
+
+
+
